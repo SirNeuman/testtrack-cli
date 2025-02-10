@@ -8,9 +8,9 @@ Provides the `testtrack` command line interface as part of Betterment's [TestTra
 
 The `testtrack` CLI has the following features:
 
-* Provides an app-language-agnostic developer experience for configuring TestTrack splits from your shell alongside your app code.
-* Manages TestTrack migrations representing those configuration changes within your application's codebase so that your split configs follow your code from development, through tests and into production via plugging `testtrack migrate` into your build/deploy pipeline.
-* Provides a zero-config dependency-free simplified implementation of the TestTrack server REST API for developers to use when developing locally (or on a cloud VM/container if that's your cup of tea).
+- Provides an app-language-agnostic developer experience for configuring TestTrack splits from your shell alongside your app code.
+- Manages TestTrack migrations representing those configuration changes within your application's codebase so that your split configs follow your code from development, through tests and into production via plugging `testtrack migrate` into your build/deploy pipeline.
+- Provides a zero-config dependency-free simplified implementation of the TestTrack server REST API for developers to use when developing locally (or on a cloud VM/container if that's your cup of tea).
 
 ## Getting started
 
@@ -26,7 +26,7 @@ From your app root directory run:
 testtrack init_project
 ```
 
-This will create a `testtrack` subdirectory in your app that will store migration and schema YAML files. *Commit these files to your repository.*
+This will create a `testtrack` subdirectory in your app that will store migration and schema YAML files. _Commit these files to your repository._
 
 It will also create a `~/.testtrack` directory that will hold your local server's assignment overrides (`assignments.yml`).
 
@@ -93,12 +93,17 @@ Happy TestTracking!
 The following configuration options are available:
 
 ### Split ownership
+
 If you have a large organization, you may wish to tag ownership of splits to a specific team to help provide accountability for clean up. This is supported natively in test_track.
 
 1. You must specify an ownership file. The default file exists at `testtrack/owners.yml` though that can be overwritten with the TESTTRACK_OWNERSHIP_FILE environment variable.
 2. This file should contain a list of team names, one per line. Any sub-values of the key names will be ignored for the purposes of test track.
 3. If the test track client is able to find this file, it will require an `--owner` flag be set when creating new splits and experiements.
 4. This data will be passed to the test track server where it can be recorded on the split records
+
+### Syncing split assignments
+
+If you want to ensure that your local split assignments are in sync with your remote (production) assignments, you can run `TESTTRACK_CLI_URL=<base_url> testtrack sync` (e.g. `TESTTRACK_CLI_URL=https://tt.example.com testtrack sync`) from your project directory to pull the assignments from your remote server into your local `schema.yml` file.
 
 ## How to Contribute
 
@@ -108,13 +113,13 @@ Before diving in, [check our issue tracker](https://github.com/Betterment/testtr
 
 ### Suggested Workflow
 
-* Fork the project and create a new branch for your contribution.
-* Write your contribution (and any applicable test coverage).
-* Make sure all tests pass (`make test`).
-* Submit a pull request.
+- Fork the project and create a new branch for your contribution.
+- Write your contribution (and any applicable test coverage).
+- Make sure all tests pass (`make test`).
+- Submit a pull request.
 
 ### Some tips for those new to golang
 
-* Set up your workspace according to [go standards](https://golang.org/doc/code.html#Organization).
-* For macOS and homebrew users, run `brew bundle` to install `go` itself.
-* Build and run the CLI using `go run testtrack/main.go`.
+- Set up your workspace according to [go standards](https://golang.org/doc/code.html#Organization).
+- For macOS and homebrew users, run `brew bundle` to install `go` itself.
+- Build and run the CLI using `go run testtrack/main.go`.
